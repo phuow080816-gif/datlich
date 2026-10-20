@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#bdeBff">
+  <title>Our Little Ocean Date ♡</title>
+  
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Thư viện gửi email -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- JavaScript của website -->
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <!-- Nền đại dương và sticker trang trí -->
+  <div class="ocean-bg" aria-hidden="true">
+    <span class="sparkle s1">✦</span>
+    <span class="sparkle s2">✧</span>
+    <span class="sparkle s3">✦</span>
+    <span class="sparkle s4">✧</span>
+
+    <span class="sea-sticker fish">🐠</span>
+    <span class="sea-sticker jelly">🐳</span>
+    <span class="sea-sticker moon">☾</span>
+    <span class="sea-sticker shell">🐚</span>
+
+    <div id="bubbleLayer"></div>
+  </div>
+
+  <main class="app-shell">
+
+    <!-- MÀN HÌNH 1: MỞ ĐẦU -->
+    <section
+      class="screen intro-screen active"
+      id="introScreen"
+      aria-labelledby="introTitle"
+    >
+      <div class="intro-content">
+        <p class="eyebrow">✧ a little message from the sea ✧</p>
+
+        <h1 id="introTitle">
+          Dating With Me<br>
+           <span class="pink-text">♡</span>
+        </h1>
+
+        <p class="subtitle">
+          Đây là trang web được thiết kế riêng nhằm
+          phục vụ cho việc đặt lịch hẹn hò
+        </p>
+
+        <button
+          class="heart-open"
+          id="openHeart"
+          aria-label="Open the heart invitation"
+        >
+          <span class="big-heart">♥</span>
+          <span class="heart-glint">✦</span>
+        </button>
+
+        <p class="tap-hint">Hãy ấn vào trái tim để mở ♡</p>
+
+        <div class="tiny-note">
+          made with love
+        </div>
+      </div>
+    </section>
+
+    <!-- MÀN HÌNH 2: YES / NO -->
+    <section
+      class="screen question-screen"
+      id="questionScreen"
+      aria-labelledby="questionTitle"
+      aria-hidden="true"
+    >
+      <div class="question-card dreamy-card">
+        <div class="card-deco deco-left">✧</div>
+        <div class="card-deco deco-right">♡</div>
+
+        <div class="mini-heart">♡</div>
+
+        <p class="eyebrow">hãy trả lời câu hỏi</p>
+
+        <h2 id="questionTitle">
+          Em có muốn đi hẹn hò cùng tớ khôngggg?
+        </h2>
+
+        <p class="subtitle">
+          tớ sẽ qua đón em ♡
+        </p>
+
+        <div class="answer-buttons" id="answerButtons">
+          <button class="btn btn-yes" id="yesButton">
+            YES! ♡
+          </button>
+
+          <button class="btn btn-no" id="noButton">
+            NOOO
+          </button>
+        </div>
+
+        <p class="tease-message" id="teaseMessage" aria-live="polite">
+          Chọn câu trả lời bằng trái tim nha ♡
+        </p>
+      </div>
+    </section>
+
+    <!-- MÀN HÌNH 3: ĐẶT LỊCH -->
+    <section
+      class="screen plan-screen"
+      id="planScreen"
+      aria-labelledby="planTitle"
+      aria-hidden="true"
+    >
+      <div class="plan-card dreamy-card">
+
+        <div class="plan-heading">
+          <span class="heading-sticker">💗</span>
+
+          <p class="eyebrow">our tiny adventure</p>
+
+          <h2 id="planTitle">
+            YAYYY! <span class="pink-text">♡</span>
+          </h2>
+
+          <p class="subtitle">Let's plan our little date!</p>
+
+          <p class="soft-line">
+            moahhhhh
+          </p>
+        </div>
+
+        <form id="dateForm" novalidate>
+
+          <!-- Chọn ngày và giờ -->
+          <div class="form-grid">
+
+            <label class="field">
+              <span class="field-label">⭐ Ngày hẹn</span>
+
+              <input
+  type="date"
+  id="dateInput"
+  name="date"
+  min="2026-10-21"
+  max="2026-10-31"
+  required
+>
+
+              <small class="field-hint">
+                Chọn một ngày gần nhất nhó.
+              </small>
+            </label>
+
+            <label class="field">
+              <span class="field-label">🕒 Giờ hẹn</span>
+
+              <input
+                type="time"
+                id="timeInput"
+                name="time"
+                required
+              >
+
+              <small class="field-hint">
+                Tớ sẽ đến đúng giờ!
+              </small>
+            </label>
+
+          </div>
+
+          <!-- Chọn địa điểm -->
+          <fieldset class="place-fieldset">
+            <legend>💌 Mình sẽ đi đâu nhỉ?</legend>
+
+            <div class="place-grid" id="placeGrid">
+
+              <button
+                type="button"
+                class="place-option cafe"
+                data-place="cafe"
+                aria-pressed="false"
+              >
+                <span class="place-emoji">☕</span>
+                <strong>Đi uống cafe</strong>
+                <span>uống nước, ăn bánh và tâm sự.</span>
+              </button>
+
+              <button
+                type="button"
+                class="place-option movie"
+                data-place="movie"
+                aria-pressed="false"
+              >
+                <span class="place-emoji">🍽️</span>
+                <strong>Đi ăn và đi lượn</strong>
+                <span>còn nhiều món lắm ó!!</span>
+              </button>
+
+              <button
+                type="button"
+                class="place-option ocean"
+                data-place="ocean"
+                aria-pressed="false"
+              >
+                <span class="place-emoji">💤</span>
+                <strong>Đi ngủ</strong>
+                <span>Tbox nhé!</span>
+              </button>
+
+              <button
+                type="button"
+                class="place-option idea"
+                data-place="idea"
+                aria-pressed="false"
+              >
+                <span class="place-emoji">💌</span>
+                <strong>Ý kiến của em</strong>
+                <span>Em chọn địa điểm nhó</span>
+              </button>
+
+            </div>
+          </fieldset>
+
+          <!-- Chỉ hiện khi chọn Your Idea -->
+          <label
+            class="field custom-place-field"
+            id="customPlaceField"
+            hidden
+          >
+            <span class="field-label">
+              💗 Cho tớ xin ý kiến ♡
+            </span>
+
+            <input
+              type="text"
+              id="customPlaceInput"
+              maxlength="180"
+              placeholder="Em muốn đi đâu với tớ nèe?"
+            >
+
+            <small class="char-count" id="charCount">
+              0/180
+            </small>
+          </label>
+
+          <!-- Thông báo lỗi hoặc trạng thái -->
+          <p
+            class="form-message"
+            id="formMessage"
+            role="status"
+            aria-live="polite"
+          ></p>
+
+          <button
+            type="submit"
+            class="btn btn-confirm"
+            id="confirmButton"
+          >
+            <span class="button-label">
+              Xác nhận buổi hẹn của chúng ta! 💗
+            </span>
+
+            <span class="button-loader" aria-hidden="true"></span>
+          </button>
+
+          <p class="privacy-note">
+            ♡ Hãy nhớ và gặp đúng hẹn nhá.
+          
+          </p>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- MÀN HÌNH 4: HOÀN TẤT -->
+    <section
+      class="screen complete-screen"
+      id="completeScreen"
+      aria-labelledby="completeTitle"
+      aria-hidden="true"
+    >
+      <div class="complete-card dreamy-card">
+
+        <div class="celebration-heart" aria-hidden="true">♥</div>
+
+        <p class="eyebrow">chúc mừng lịch hẹn đã được đặt thành công</p>
+
+        <h2 id="completeTitle">
+          Phiếu xác nhận!! <span class="pink-text">💗</span>
+        </h2>
+
+        <p class="subtitle">
+          
+        </p>
+
+        <div class="date-summary">
+
+          <div class="summary-row">
+            <span>⭐ Ngày</span>
+            <strong id="summaryDate">—</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>🕒 Giờ</span>
+            <strong id="summaryTime">—</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>📍 Địa điểm</span>
+            <strong id="summaryPlace">—</strong>
+          </div>
+
+        </div>
+
+        <p class="closing-line">
+          Tớ sẽ đến đón em đúng giờ♡
+        </p>
+
+        <button
+          type="button"
+          class="btn btn-confirm"
+          id="backToPlans"
+        >
+          Sửa lại lịch ✿
+        </button>
+
+        <p class="privacy-note">
+          Lịch hẹn đang nằm trong phiên truy cập hiện tại thôi nha.
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Khu vực tạo hiệu ứng trái tim -->
+  <div class="toast-hearts" id="toastHearts" aria-hidden="true"></div>
+
+</body>
+</html>
